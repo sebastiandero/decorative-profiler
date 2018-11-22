@@ -1,6 +1,6 @@
 {
   "name": "decorative-profiler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A method, function and block profiler that supports typescript decorators!",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

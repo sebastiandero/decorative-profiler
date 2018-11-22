@@ -26,9 +26,7 @@ if (typeof perfWrapper === 'undefined') {
 
 enableProfiling();
 
-
 /////////////////////////////////////////
-
 
 function enableNodeObserver() {
     if (!nodeObserver && nodeRuntime) {
