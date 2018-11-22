@@ -23,6 +23,11 @@
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.9.tgz#c16b55186ee73ae65e001fbee69d392c51337ad1"
   integrity sha512-wNMwXSUcwyYajtbayfPp55tSayuDVU6PfY5gzvRSj80UvxdXEJOVPnUVajaOp7NgXLm+1e2ZDLULmpsU9vDvQw==
 
+"@types/node@^10.12.10":
+  version "10.12.10"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.10.tgz#4fa76e6598b7de3f0cb6ec3abacc4f59e5b3a2ce"
+  integrity sha512-8xZEYckCbUVgK8Eg7lf5Iy4COKJ5uXlnIOnePN0WUwSQggy9tolM+tDJf7wMOnT/JT/W9xDYIaYggt3mRV2O5w==
+
 abab@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.0.tgz#aba0ab4c5eee2d4c79d3487d85450fb2376ebb0f"
@@ -442,6 +447,11 @@ braces@^2.3.1:
     snapdragon-node "^2.0.1"
     split-string "^3.0.2"
     to-regex "^3.0.1"
+
+browser-or-node@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/browser-or-node/-/browser-or-node-1.1.0.tgz#e47e8d7701c42d83edab02abc1f6b532a4d6b66d"
+  integrity sha512-/YRGjKbrTId3N9RCTp91QgQ+AowVUuZxAcOuAYra6B/EkhK7hTDWB2/AAawvAsvOI3QjPnSnKCEEh89xmUoYLg==
 
 browser-process-hrtime@^0.1.2:
   version "0.1.3"
