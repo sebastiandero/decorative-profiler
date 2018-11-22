@@ -1,0 +1,35 @@
+{
+  "name": "decorative-profiler",
+  "version": "1.0.0",
+  "description": "A method, function and block profiler that supports typescript decorators!",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "todo"
+  },
+  "keywords": [
+    "profiler",
+    "decorators",
+    "typescript",
+    "javascript",
+    "ts",
+    "runtime",
+    "performance",
+    "measure",
+    "code",
+    "utility"
+  ],
+  "author": "Sebastian De Ro",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^23.3.9",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.1.6"
+  }
+}
