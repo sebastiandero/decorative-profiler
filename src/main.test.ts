@@ -73,7 +73,7 @@ test('should still run as a function: function factory', () => {
     class Abc {
         myMethod = profiledFunction(() => {
             return 1 + 2
-        })
+        }, "myMethod")
     }
 
     let abc = new Abc()
@@ -92,7 +92,7 @@ test('should work with "this": function factory', () => {
 
         myMethod = profiledFunction(() => {
             return 1 + 2 + this.myField
-        })
+        }, "myMethod")
     }
 
     let abc = new Abc()

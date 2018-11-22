@@ -61,3 +61,13 @@ console.log(summary)
 let singleSummary = stringSummary("yourCustomNameOrTheMethodName")
 console.log(singleSummary)    
 ```
+
+example output of the summary and single summary respectively:
+```text
+myMethod: callCount=2 totalRunTime=0.104156 averageRunTime=0.052078
+```
+
+```text
+myMethod: callCount=2 totalRunTime=0.104156 averageRunTime=0.052078
+myMethod2: callCount=2 totalRunTime=0.104156 averageRunTime=0.052078
+```
