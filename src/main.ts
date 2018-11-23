@@ -50,18 +50,32 @@ export function profiledFunction(f: Function, customName?: string) {
     }
 }
 
-function start(name: string) {
+/**
+ * start a block measurement
+ * @param name name of the block
+ */
+export function start(name: string) {
     performanceMeasurer.start(name)
 }
 
-function end(name: string) {
+/**
+ * start a block measurement
+ * @param name name of the block
+ */
+export function end(name: string) {
     performanceMeasurer.end(name)
 }
 
+/**
+ * get a pretty summary of your profiling
+ */
 export function stringSummaryAll() {
     return performanceMeasurer.stringSummaryAll()
 }
 
+/**
+ * clear all measurements
+ */
 export function clear() {
     return performanceMeasurer.clear()
 }
