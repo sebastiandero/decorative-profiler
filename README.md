@@ -11,7 +11,7 @@ also, all parameter combinations and thinkable types are supported even if not u
 
 using typescript annotations you can do:
 ```typescript
-import {Profile} from 'decorative-profiler'
+import {Profile, clear} from 'decorative-profiler'
 
 class Abc {
 
@@ -27,6 +27,15 @@ class Abc {
             return 1 + 2 + this.myField
         }
     }
+    
+    
+let abc = new Abc()
+
+abc.myMethod()
+abc.myMethod()
+
+// you can also clear measurements
+clear()
 ```
 and to print all or a specific summary: 
 ```typescript

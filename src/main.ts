@@ -61,3 +61,7 @@ function end(name: string) {
 export function stringSummaryAll() {
     return performanceMeasurer.stringSummaryAll()
 }
+
+export function clear() {
+    return performanceMeasurer.clear()
+}

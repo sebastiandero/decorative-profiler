@@ -16,4 +16,9 @@ export class WebPerformanceMeasurer extends PerformanceMeasurer {
             this.allProfiled[name] = []
         }
     }
+
+    clear() {
+        super.clear()
+        this.perf.clearMarks()
+    }
 }

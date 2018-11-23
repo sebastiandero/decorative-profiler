@@ -13,6 +13,10 @@ export abstract class PerformanceMeasurer {
         this.enabled = false
     }
 
+    public clear() {
+        this.allProfiled = {}
+    }
+
     public start(name: string) {
         if (this.enabled) {
             this.perf.mark(`${name}-start`)

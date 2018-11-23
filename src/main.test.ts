@@ -1,6 +1,8 @@
-import {disableProfiling, enableProfiling, Profile, profiledFunction, stringSummaryAll} from "./main"
+import {clear, disableProfiling, enableProfiling, Profile, profiledFunction, stringSummaryAll} from "./main"
 
 test('should still run as a function: decorator', () => {
+    clear()
+
     class Abc {
         @Profile()
         myMethod() {
@@ -14,6 +16,8 @@ test('should still run as a function: decorator', () => {
 });
 
 test('should work with "this": decorator', () => {
+    clear()
+
     class Abc {
 
         myField = 10
@@ -30,6 +34,7 @@ test('should work with "this": decorator', () => {
 });
 
 test('should work with disabled profiling', () => {
+    clear()
     disableProfiling()
 
     class Abc {
@@ -48,6 +53,8 @@ test('should work with disabled profiling', () => {
     enableProfiling()
 });
 test('should provide string summary', () => {
+    clear()
+
     class Abc {
 
         myField = 10
@@ -60,7 +67,7 @@ test('should provide string summary', () => {
 
         @Profile()
         myMethod2222222222222222222() {
-            for (let i = 0; i < 50_000; i++) {
+            for (let i = 0; i < 50_000_000; i++) {
                 i = i * 10 / 5 / 2
             }
 
@@ -83,6 +90,8 @@ test('should provide string summary', () => {
 });
 
 test('should still run as a function: function factory', () => {
+    clear()
+
     class Abc {
         myMethod = profiledFunction(() => {
             return 1 + 2
@@ -99,6 +108,8 @@ test('should still run as a function: function factory', () => {
 });
 
 test('should work with "this": function factory', () => {
+    clear()
+
     class Abc {
 
         myField = 10
