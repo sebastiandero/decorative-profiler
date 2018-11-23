@@ -1,4 +1,4 @@
-import {clear, disableProfiling, enableProfiling, Profile, profiledFunction, stringSummaryAll} from "./main"
+import {clear, disableProfiling, enableProfiling, end, Profile, profiledFunction, start, stringSummaryAll} from "./main"
 
 test('should still run as a function: decorator', () => {
     clear()
@@ -125,5 +125,21 @@ test('should work with "this": function factory', () => {
     let summary = stringSummaryAll()
     console.log(summary)
     expect(abc.myMethod()).toBe(13)
+    expect(summary).toBeTruthy()
+});
+
+
+test('should profile blocks', () => {
+    clear()
+
+    start("myBlock")
+    const a = 1
+    const b = 2
+    const c = a + b
+    console.log(c)
+    end("myBlock")
+
+    let summary = stringSummaryAll()
+    console.log(summary)
     expect(summary).toBeTruthy()
 });
