@@ -64,10 +64,12 @@ console.log(singleSummary)
 
 example output of the summary and single summary respectively:
 ```text
-myMethod: callCount=2 totalRunTime=0.104156 averageRunTime=0.052078
+|myMethod2222222222222222222| callCount=4     | totalRunTime=3.472292                      | averageRunTime=0.868073                      |
 ```
 
 ```text
-myMethod: callCount=2 totalRunTime=0.104156 averageRunTime=0.052078
-myMethod2: callCount=2 totalRunTime=0.104156 averageRunTime=0.052078
+|Summary                    |                 |                                            |                                              |
+|myMethod                   | callCount=8     | totalRunTime=0.187811                      | averageRunTime=0.023476375                   |
+|myMethod2222222222222222222| callCount=4     | totalRunTime=3.472292                      | averageRunTime=0.868073                      |
+|                           | callCount=12    | sumTotalRunTime=3.660103                   |                                              |
 ```

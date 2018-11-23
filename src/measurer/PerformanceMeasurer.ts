@@ -53,18 +53,32 @@ export abstract class PerformanceMeasurer {
      * @param totalRuntimePadding
      * @param avgRunTimePadding
      */
-    stringSummary(name: string, namePadding: number = 20, callCountPadding: number = 20, totalRuntimePadding: number = 20, avgRunTimePadding: number = 20) {
-        return `${padString(name, namePadding)}:
-        callCount=${padString(this.callCount(name) + "", callCountPadding)}|
-        totalRunTime=${padString(this.totalRunTime(name) + "", totalRuntimePadding)}|
-        averageRunTime=${padString(this.averageRunTime(name) + "", avgRunTimePadding)}|`
+    stringSummary(name: string, namePadding: number = 20, callCountPadding: number = 6, totalRuntimePadding: number = 30, avgRunTimePadding: number = 30) {
+        return `|${padString(name, namePadding)}| callCount=${padString(this.callCount(name) + "", callCountPadding)}|` +
+            ` totalRunTime=${padString(this.totalRunTime(name) + "", totalRuntimePadding)}|` +
+            ` averageRunTime=${padString(this.averageRunTime(name) + "", avgRunTimePadding)}|`
     }
 
     /**
      * prints all available data about all the profiled entities
      */
     stringSummaryAll() {
-        return Object.keys(this.allProfiled).map(key => this.stringSummary(key)).reduce((a, b) => `${a}\n${b}`)
+        const namePadding = Math.max.apply(null, Object.keys(this.allProfiled).map(key => key.length))
+
+        return `|${padString("Summary", namePadding)}| ${padString("", 16)}| ${padString("", 43)}| ${padString("", 45)}|\n` +
+            Object.keys(this.allProfiled).map(key => this.stringSummary(key, namePadding)).reduce((a, b) => `${a}\n${b}`) +
+            `\n|${padString("", namePadding)}| ` +
+            `callCount=${padString(this.totalCalls() + "", 6)}| ` +
+            `sumTotalRunTime=${padString(this.totalCallTime() + "", 27)}| ` +
+            `${padString("", 45)}|`
+    }
+
+    private totalCalls(): number {
+        return Object.keys(this.allProfiled).map(key => this.callCount(key)).reduce((a, b) => a + b)
+    }
+
+    private totalCallTime(): number {
+        return Object.keys(this.allProfiled).map(key => this.totalRunTime(key)).reduce((a, b) => a + b)
     }
 }
 

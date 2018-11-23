@@ -56,6 +56,16 @@ test('should provide string summary', () => {
         myMethod() {
             return 1 + 2 + this.myField
         }
+
+
+        @Profile()
+        myMethod2222222222222222222() {
+            for (let i = 0; i < 50_000; i++) {
+                i = i * 10 / 5 / 2
+            }
+
+            return 1 + 2 + this.myField
+        }
     }
 
     let abc = new Abc()
@@ -63,6 +73,9 @@ test('should provide string summary', () => {
     abc.myMethod()
     abc.myMethod()
     abc.myMethod()
+    abc.myMethod2222222222222222222()
+    abc.myMethod2222222222222222222()
+    abc.myMethod2222222222222222222()
 
     let summary = stringSummaryAll()
     console.log(summary)
