@@ -1,65 +1,24 @@
-// wrapper is needed because node doesnt quite fully support performance the standard way
+import {PerformanceMeasurer} from "./measurer/PerformanceMeasurer"
+import {NodePerformanceMeasurer} from "./measurer/NodePerformanceMeasurer"
+import {WebPerformanceMeasurer} from "./measurer/WebPerformanceMeasurer"
 
-let perfWrapper: Performance
-let PerfObserver: any
+const isBrowser = !!performance.mark
 
-const nodeRuntime = typeof process !== 'undefined' && process.versions != null && process.versions.node != null
+const performanceMeasurer: PerformanceMeasurer = isBrowser ? new WebPerformanceMeasurer() : new NodePerformanceMeasurer()
 
-let nodeObserver: PerformanceObserver | null
-
-let enabled = true;
-
-var allProfiled: { [key: string]: PerformanceEntry[] } = {};
-
-/////////////////////////////////////////
-
-if (nodeRuntime) {
-    perfWrapper = require('perf_hooks').performance
-    PerfObserver = require('perf_hooks').PerformanceObserver
-} else {
-    perfWrapper = performance
-}
-if (typeof perfWrapper === 'undefined') {
-    throw 'performance feature could not be found'
-
-}
-
-enableProfiling();
-
-/////////////////////////////////////////
-
-function enableNodeObserver() {
-    if (!nodeObserver && nodeRuntime) {
-        nodeObserver = new PerfObserver((list, observer) => {
-            list.getEntries().forEach(measure => {
-                if (!allProfiled[measure.name]) {
-                    allProfiled[measure.name] = [measure]
-                }
-                allProfiled[measure.name].push(measure)
-            })
-        });
-        // @ts-ignore
-        nodeObserver.observe({entryTypes: ['measure']});
-    }
-}
 
 /**
  * disables any profiling logic
  */
 export function disableProfiling() {
-    enabled = false;
-    if (nodeObserver) {
-        nodeObserver.disconnect()
-    }
-    nodeObserver = null
+    performanceMeasurer.disable()
 }
 
 /**
  * enables profiling logic
  */
 export function enableProfiling() {
-    enableNodeObserver()
-    enabled = true
+    performanceMeasurer.enable()
 }
 
 /**
@@ -92,58 +51,13 @@ export function profiledFunction(f: Function, customName?: string) {
 }
 
 function start(name: string) {
-    if (enabled) {
-        perfWrapper.mark(`${name}-start`)
-    }
+    performanceMeasurer.start(name)
 }
 
 function end(name: string) {
-    if (enabled) {
-        perfWrapper.mark(`${name}-end`)
-        perfWrapper.measure(name, `${name}-start`, `${name}-end`)
-        if (!nodeRuntime) {
-            allProfiled[name] = []
-        }
-    }
+    performanceMeasurer.end(name)
 }
 
-/////////////////////////////////////////
-
-function getEntriesByName(name: string): PerformanceEntry[] {
-    if (!nodeRuntime) {
-        return perfWrapper.getEntriesByName(name)
-    } else {
-        return allProfiled[name]
-    }
-}
-
-/**
- * get the amount of calls to a specific profiled entity
- * @param name
- */
-export function callCount(name: string) {
-    return getEntriesByName(name).length
-}
-
-export function totalRunTime(name: string) {
-    return getEntriesByName(name).map(value => value.duration).reduce((a, b) => a + b)
-}
-
-export function averageRunTime(name: string) {
-    return totalRunTime(name) / callCount(name)
-}
-
-/**
- * prints all available data about the profiled entity
- * @param name
- */
-export function stringSummary(name: string) {
-    return `${name}: callCount=${callCount(name)} totalRunTime=${totalRunTime(name)} averageRunTime=${averageRunTime(name)}`
-}
-
-/**
- * prints all available data about all the profiled entities
- */
 export function stringSummaryAll() {
-    return Object.keys(allProfiled).map(key => stringSummary(key)).reduce((a, b) => `${a}\n${b}`)
+    return performanceMeasurer.stringSummaryAll()
 }
